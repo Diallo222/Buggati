@@ -9,7 +9,7 @@ function App() {
       <Loader started={started} setStarted={setStarted} />
       <Suspense
         fallback={
-          <div className="w-full h-full bg-black text-3xl text-white flex justify-center items-center">
+          <div className="w-full h-full bg-black text-2xl text-white title flex justify-center items-center">
             initializing
           </div>
         }
