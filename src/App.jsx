@@ -5,9 +5,17 @@ function App() {
   const [started, setStarted] = useState(false);
 
   return (
-    <div className="overscroll-none w-screen h-screen">
+    <div className="  bg-black overscroll-none w-screen h-screen">
       <Loader started={started} setStarted={setStarted} />
-      <Suspense fallback={null}>{started && <Scene />}</Suspense>
+      <Suspense
+        fallback={
+          <div className="w-full h-full bg-black text-3xl text-white flex justify-center items-center">
+            initializing
+          </div>
+        }
+      >
+        {started && <Scene />}
+      </Suspense>
     </div>
   );
 }
