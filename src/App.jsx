@@ -1,16 +1,15 @@
-import React , {useState , Suspense} from "react"
-import { Scene } from "./canvas"
+import React, { useState, Suspense } from "react";
+import { Loader, Scene } from "./canvas";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false);
 
   return (
-      <div className="overscroll-none w-screen h-screen">
-        <Suspense fallback={null}>
-          <Scene /> 
-        </Suspense>
-      </div>
-  )
+    <div className="overscroll-none w-screen h-screen">
+      <Loader started={started} setStarted={setStarted} />
+      <Suspense fallback={null}>{started && <Scene />}</Suspense>
+    </div>
+  );
 }
 
-export default App
+export default App;

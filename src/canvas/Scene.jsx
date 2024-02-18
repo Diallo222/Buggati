@@ -26,15 +26,25 @@ const Ground = () => {
   //   normal.encoding = LinearEncoding;
   // },[normal , roughness])
 
-    // useFrame((state, delta) => {
-    //   let t = -state.clock.getElapsedTime() * 0.128;
-    //   roughness.offset.set(0, t % 1);
-    //   normal.offset.set(0, t % 1);
-    // });
+  // useFrame((state, delta) => {
+  //   let t = -state.clock.getElapsedTime() * 0.128;
+  //   roughness.offset.set(0, t % 1);
+  //   normal.offset.set(0, t % 1);
+  // });
   return (
     <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
       <planeGeometry args={[30, 30]} />
-      <MeshReflectorMaterial
+      <meshStandardMaterial
+        // attach="material"
+        color="#343434"
+        normalMap={normal}
+        dithering
+        envMapIntensity={0}
+        roughnessMap={roughness}
+        roughness={0.7}
+        normalScale={[0.015, 0.015]}
+      />
+      {/* <MeshReflectorMaterial
         normalMap={normal}
         roughnessMap={roughness}
         normalScale={[0.015 , 0.015]}
@@ -53,21 +63,21 @@ const Ground = () => {
         maxDepthThreshold={1}
         depthToBlurRatioBias={0.25}
         reflectorOffset={0.2}
-      />
+      /> */}
     </mesh>
   );
 };
 function Scene() {
   return (
     <Canvas shadows>
-      <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
+      <OrbitControls autoRotate target={[0, 0.35, 0]} maxPolarAngle={1.45} />
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
       <color args={["#000000"]} attach="background" />
       {/* <ambientLight intensity={1} /> */}
       <spotLight
         color={[1, 0.25, 0.7]}
-        intensity={4}
-        angle={2}
+        intensity={6}
+        angle={3}
         penumbra={0.5}
         position={[5, 4, 0]}
         castShadow
@@ -75,21 +85,21 @@ function Scene() {
       />
       <spotLight
         color={[0.14, 0.5, 1]}
-        intensity={4}
-        angle={2}
+        intensity={6}
+        angle={3}
         penumbra={0.5}
         position={[-5, 4, 0]}
         castShadow
         shadow-bias={-0.0001}
       />
-       {/* <spotLight
+      {/* <spotLight
           angle={3}
           position={[0, 4, 0]}
           intensity={4}
           color={"#ffffff"}
           castShadow
         /> */}
-       {/* <hemisphereLight  intensity={0.1} /> */}
+      {/* <hemisphereLight  intensity={0.1} /> */}
       <CubeCamera resolution={256} frames={Infinity}>
         {(texture) => (
           <>
@@ -100,7 +110,7 @@ function Scene() {
       </CubeCamera>
       <Lights />
       <Ground />
-      <Effects/>
+      <Effects />
     </Canvas>
   );
 }
