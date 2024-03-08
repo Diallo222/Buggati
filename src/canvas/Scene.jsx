@@ -7,24 +7,24 @@ import {
   CubeCamera,
   Environment,
 } from "@react-three/drei";
-import { LinearEncoding, RepeatWrapping, TextureLoader } from "three";
+import { SRGBColorSpace, RepeatWrapping, TextureLoader } from "three";
 import { Bugatti } from "./Buggati";
 import { Lights } from "./Lights";
 import Effects from "./Effects";
 
 const Ground = () => {
   const [roughness, normal] = useLoader(TextureLoader, [
-    "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_plasterbrick_05/rough_plasterbrick_05_rough_1k.jpg",
-    "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_plasterbrick_05/rough_plasterbrick_05_nor_dx_1k.jpg",
+    "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rubber_tiles/rubber_tiles_rough_1k.jpg",
+    "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rubber_tiles/rubber_tiles_nor_dx_1k.jpg",
   ]);
-  // useEffect(()=>{
-  //   [normal , roughness].forEach((t)=>{
-  //       t.wrapS =RepeatWrapping;
-  //       t.wrapT =RepeatWrapping;
-  //       t.repeat.set(5,5);
-  //   });
-  //   normal.encoding = LinearEncoding;
-  // },[normal , roughness])
+  useEffect(()=>{
+    [normal , roughness].forEach((t)=>{
+        t.wrapS =RepeatWrapping;
+        t.wrapT =RepeatWrapping;
+        t.repeat.set(5,5);
+    });
+    normal.colorSpace = SRGBColorSpace;
+  },[normal , roughness])
 
   // useFrame((state, delta) => {
   //   let t = -state.clock.getElapsedTime() * 0.128;
@@ -70,7 +70,7 @@ const Ground = () => {
 function Scene() {
   return (
     <Canvas shadows>
-      <OrbitControls autoRotate target={[0, 0.35, 0]} maxPolarAngle={1.45} />
+      <OrbitControls enableZoom={false} autoRotate target={[0, 0.35, 0]} maxPolarAngle={1.45} />
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
       <color args={["#000000"]} attach="background" />
       {/* <ambientLight intensity={1} /> */}
@@ -92,13 +92,15 @@ function Scene() {
         castShadow
         shadow-bias={-0.0001}
       />
-      {/* <spotLight
+      <spotLight
           angle={3}
+          intensity={6}
+          penumbra={0.5}
           position={[0, 4, 0]}
-          intensity={4}
           color={"#ffffff"}
+          shadow-bias={-0.0001}
           castShadow
-        /> */}
+        />
       {/* <hemisphereLight  intensity={0.1} /> */}
       <CubeCamera resolution={256} frames={Infinity}>
         {(texture) => (

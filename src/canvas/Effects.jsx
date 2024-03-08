@@ -20,12 +20,12 @@ import {
           {/* <Noise opacity={0.01} /> */}
           <Bloom
           blendFunction={BlendFunction.ADD}
-          intensity={1.3} // The bloom intensity.
+          intensity={1} // The bloom intensity.
           width={300} // render width
           height={300} // render height
           kernelSize={5} // blur kernel size
-          luminanceThreshold={0.15} // luminance threshold. Raise this value to mask out darker elements in the scene.
-          luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+          luminanceThreshold={0.1} // luminance threshold. Raise this value to mask out darker elements in the scene.
+          luminanceSmoothing={0.02} // smoothness of the luminance threshold. Range is [0, 1]
         />
         <ChromaticAberration
           blendFunction={BlendFunction.NORMAL} // blend mode

@@ -12,7 +12,7 @@ export function Lights() {
       let mesh = itemsRef.current[i];
       let z = (i - 7) * 3.5 + ((elapsed * 0.4) % 3.5) * 2;
       let dist = Math.abs(z);
-      mesh.position.set(0, 2.4, -z);
+      mesh.position.set(0, 2.6, -z);
       mesh.scale.set(1 - dist * 0.04, 1 - dist * 0.04, 1 - dist * 0.04);
 
       let colorScale = 1;
@@ -22,7 +22,7 @@ export function Lights() {
       colorScale *= 0.5;
 
       if (i % 2 == 1) {
-        mesh.material.emissive = new Color(6, 0.15, 0.7).multiplyScalar(colorScale);
+        mesh.material.emissive = new Color("#FFFF").multiplyScalar(colorScale);
       } else {
         mesh.material.emissive = new Color(0.1, 0.7, 3).multiplyScalar(colorScale);
       }
