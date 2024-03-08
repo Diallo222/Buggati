@@ -14,10 +14,16 @@ function App() {
           </div>
         }
       >
-        {started && <Scene />}
-       {started && <div className="absolute bottom-2 flex justify-center items-center w-full">
-        <p className="title self-center  text-xs text-gray-50">{'<-- Drag -->'}</p>
-        </div>}
+        {started && (
+          <>
+            <Scene />
+            <div className="absolute bottom-2 flex justify-center items-center w-full">
+              <p className="title self-center  text-xs text-gray-50">
+                {"<-- Drag -->"}
+              </p>
+            </div>
+          </>
+        )}
       </Suspense>
     </div>
   );
